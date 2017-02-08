@@ -48,17 +48,21 @@ def mkdivitem(a, b, f):
     else:
         y = random.randint(10 ** (b - 1), 10 ** b - 1)
     if f == 0:
-        x = int(x / y) * y
-        if x < 10 ** (a - 1):
-            x = int(x / y + 1) * y
         r = int(x / y)
+        if y * r < 10 ** (a - 1):
+            r = r + 1
+        x = y * r
         s = 0
     else:
         r = int(x / y)
         s = x - y * r
         if s == 0:
-            s = random.randint(1, min(y - 1, (10 ** a) - 1 - x))
-            x = x + s
+            high = min(y - 1, 10 ** a - 1 - x)
+            if high < 3:
+                s = 1
+            else:
+                s = random.randint(1, high)
+            x = y * r + s
     return [x, y, r, s]
 
 # make string for display
