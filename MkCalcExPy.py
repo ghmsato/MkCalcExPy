@@ -62,6 +62,8 @@ def mkdivitem(a, b, f):
                 s = 1
             else:
                 s = random.randint(1, high)
+            if (y * r + s) > 10 ** a - 1:
+                r = r - 1
             x = y * r + s
     return [x, y, r, s]
 
